@@ -41,3 +41,25 @@ export async function getAllcars (req,res){
         })
     }
 }
+
+export async function getcarById (req,res){
+    try {
+        const cars = await Cars.findById(req.params.id)
+        if(!cars){
+            return res.status(404).json({
+                message : "Car Not Found"
+            })
+        }
+        res.status(200).json({
+            car : cars,
+            success : true,
+
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Cannot get the car",
+            error : error.message
+        })
+    }
+}
