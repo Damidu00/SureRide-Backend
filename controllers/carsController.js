@@ -1,9 +1,9 @@
-import carsModel from "../models/carsModel.js";
+import Cars from "../models/carsModel.js";
 
 
 export async function createCar(req, res) {
   try {
-    const car = new carsModel(req.body);
+    const car = new Cars(req.body);
     await car.save();
     res.status(201).json({
       success: true,
@@ -24,4 +24,20 @@ export async function createCar(req, res) {
       });
     }
   }
+}
+
+export async function getAllcars (req,res){
+    try {
+        const cars = await Cars.find();
+        res.status(200).json({
+            success : true,
+            cars : cars
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Cannot fetch cars",
+            error : error.message
+        })
+    }
 }
