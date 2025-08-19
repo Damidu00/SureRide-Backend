@@ -3,6 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
+import carRoutes from './routes/carsRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -31,6 +32,9 @@ app.use((req,res,next)=>{
     next()
 
 })
+
+app.use("/api/cars",carRoutes)
+
 
 
 app.listen(5000,() =>{
