@@ -92,3 +92,27 @@ export async function updateCar(req, res) {
     });
   }
 }
+
+export async function deleteCar(req, res) {
+  try {
+    const car = await Cars.findByIdAndDelete(req.params.id);
+
+    if (!car) {
+      return res.status(404).json({
+        success: false,
+        message: "Car not found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Car deleted successfully"
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error deleting car",
+      error: error.message
+    });
+  }
+}
