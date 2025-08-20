@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 import carRoutes from './routes/carsRoutes.js';
+import userRouter from './routes/userRouter.js';
 
 dotenv.config()
 const app = express();
@@ -34,7 +35,7 @@ app.use((req,res,next)=>{
 })
 
 app.use("/api/cars",carRoutes)
-
+app.use("/api/users",userRouter)
 
 
 app.listen(5000,() =>{
