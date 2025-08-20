@@ -63,3 +63,32 @@ export async function getcarById (req,res){
         })
     }
 }
+
+export async function updateCar(req, res) {
+  try {
+    const car = await Cars.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!car) {
+      return res.status(404).json({
+        success: false,
+        message: "Car not found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Car updated successfully",
+      data: car
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error updating car",
+      error: error.message
+    });
+  }
+}
