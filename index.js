@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 import carRoutes from './routes/carsRoutes.js';
 import userRouter from './routes/userRouter.js';
+import bookingRouter from './routes/bookingRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -36,6 +37,7 @@ app.use((req,res,next)=>{
 
 app.use("/api/cars",carRoutes)
 app.use("/api/users",userRouter)
+app.use("/api/bookings",bookingRouter)
 
 
 app.listen(5000,() =>{
