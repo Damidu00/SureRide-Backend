@@ -43,7 +43,10 @@ const carSchema = mongoose.Schema({
   },
   features: {
     type: [String]
-  }
+  },
+    image: {
+      type: String
+    }
 }, { timestamps: true });
 
 const Car = mongoose.model("Car", carSchema);
