@@ -3,6 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
+import cors from 'cors'
 import carRoutes from './routes/carsRoutes.js';
 import userRouter from './routes/userRouter.js';
 import bookingRouter from './routes/bookingRoutes.js';
@@ -10,7 +11,7 @@ import bookingRouter from './routes/bookingRoutes.js';
 dotenv.config()
 const app = express();
 const mongoUrl = process.env.MONGO_DB_URI
-
+app.use(cors());
 mongoose.connect(mongoUrl,{})
 const connection = mongoose.connection; 
 
