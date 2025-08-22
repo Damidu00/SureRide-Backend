@@ -3,7 +3,11 @@ import Cars from "../models/carsModel.js";
 
 export async function createCar(req, res) {
   try {
-    const car = new Cars(req.body);
+    let carData = req.body;
+    if (req.file) {
+      carData.image = req.file.filename;
+    }
+    const car = new Cars(carData);
     await car.save();
     res.status(201).json({
       success: true,
