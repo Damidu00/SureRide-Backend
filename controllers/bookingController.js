@@ -206,6 +206,7 @@ export async function getbookingById(req, res) {
         message: 'Booking not found'
       });
     }
+    
     res.status(200).json({
       success: true,
       booking: booking
