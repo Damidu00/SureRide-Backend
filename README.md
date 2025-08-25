@@ -1,67 +1,85 @@
-# SureRide — Backend
+🚗 SureRide — Backend
 
-Minimal Express + MongoDB API for the SureRide car-rental application.
+A Node.js + Express + MongoDB REST API powering the SureRide car rental application
+.
+It provides authentication, car listing, booking management, and image uploads for a seamless rental experience.
 
-This backend provides REST endpoints for users, cars and bookings, handles image uploads with Multer, and uses JWT for authentication.
+✨ Features
 
-## Quick overview
-- Tech: Node.js (ES modules), Express, Mongoose, Multer, JSON Web Tokens
-- Entry: `index.js` (listens on port 5000 by default)
+🔐 User Authentication with JWT
 
-## Requirements
-- Node.js 18+ and npm
-- A MongoDB instance (URI required)
+🚘 Car Management (CRUD + image uploads with Multer)
 
-## Required environment variables
-Create a `.env` file in `backend/` with at least:
+📅 Booking System (create, view, cancel bookings)
 
-```
+🗂 Static File Serving for uploaded images
+
+⚡ Built with Express & Mongoose (MongoDB ODM)
+
+🛠 Tech Stack
+
+Backend: Node.js (ES modules), Express.js
+
+Database: MongoDB + Mongoose
+
+Auth: JWT (JSON Web Tokens)
+
+File Uploads: Multer
+
+Dev Tools: Nodemon
+
+📂 Project Structure
+backend/
+│── index.js          # App entry, DB connection, routes
+│── routes/           # API route definitions
+│── controllers/      # Request handlers
+│── models/           # Mongoose schemas
+│── middleware/       # Auth & utilities
+│── uploads/          # Uploaded car images (static)
+│── .env              # Environment variables
+
+⚙️ Setup & Installation
+1. Requirements
+
+Node.js v18+
+
+npm or yarn
+
+A running MongoDB instance (local or cloud e.g. MongoDB Atlas)
+
+2. Clone & Install
+git clone https://github.com/yourusername/SureRide-Backend.git
+cd SureRide-Backend
+npm install
+
+3. Environment Variables
+
+Create a .env file in backend/ with:
+
 MONGO_DB_URI=your_mongo_connection_string
 SECRET=your_jwt_secret
-# optional: PORT=5000
-```
+PORT=5000
 
-## Install dependencies (PowerShell)
 
-```powershell
-cd "d:\!SLIIT UNI\Internship\Tasks\Car Rental Management sys\backend"
-npm install
-```
+💡 Add a .env.example for reference.
 
-## Run (development)
-
-Start the backend (uses nodemon):
-
-```powershell
+🚀 Run the Server
+Development
 npm start
-```
 
-You should see logs for database connection and server startup. Server default URL: `http://localhost:5000`.
 
-## API highlights
-- Static uploads served at: `GET /uploads/<filename>`
-- Main routes mounted in `index.js`:
-	- `/api/cars` — cars CRUD + image upload
-	- `/api/users` — user registration / auth
-	- `/api/bookings` — booking creation and queries
+Runs with nodemon. Default URL: http://localhost:5000
 
-Authentication
-- Requests that require authentication expect an `Authorization` header with `Bearer <token>`.
+Production
+node index.js
 
-## Project structure (important files)
-- `index.js` — app bootstrap, DB connection, global middleware and route mounting
-- `routes/` — route definitions
-- `controllers/` — request handlers
-- `models/` — Mongoose schemas
-- `uploads/` — stored images (served statically)
-
-## Notes & troubleshooting
-- If database connection fails, check `MONGO_DB_URI` in `.env`.
-- Ensure `uploads/` directory exists and Node process has write permissions.
-- JWT middleware in `index.js` attaches `req.user` when a valid token is provided; invalid tokens currently do not block requests.
-
-## Next steps (recommended)
-- Add `backend/.env.example` (I can create this for you).
-- Add a light health-check endpoint (e.g., `GET /health`) for smoke tests.
-
----
+📡 API Endpoints
+Resource	Endpoint	Description
+Users	POST /api/users/register	Register a new user
+	POST /api/users/login	Login & get JWT token
+Cars	GET /api/cars	List all cars
+	POST /api/cars	Add new car (with image)
+	PUT /api/cars/:id	Update car
+	DELETE /api/cars/:id	Remove car
+Bookings	POST /api/bookings	Create booking
+	GET /api/bookings	Get user bookings
